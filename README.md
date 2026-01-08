@@ -1,4 +1,4 @@
-I've copied this from chatgpt, will follow this
+One month plan to reshine my python skills and level up, will follow this
 
 # WEEK 1 - Python, FastAPI and sql
 ## Day 1-2: Python Refresh 
