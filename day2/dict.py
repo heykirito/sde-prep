@@ -23,4 +23,16 @@ print(counts)
 c = Counter(["a", "b", "a", "c", "b", "a"])
 print(c)
 
-# Dict comprehension
+# Dictionaries comprehension
+
+squares = {x: x*x for x in range(5)}
+print(squares)
+
+levels = ["INFO", "ERROR", "INFO", "WARNING"]
+counts = {lvl: levels.count(lvl) for lvl in set(levels)}
+print(counts)
+
+d = defaultdict(list)
+d["a"].append(1)
+d["a"].append(2)
+print(d)
