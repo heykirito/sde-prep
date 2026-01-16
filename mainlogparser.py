@@ -23,3 +23,5 @@ try:
             print(parse_log(line))
 except FIleNotFoundError:
     print("The provided file doesn't exist")
+
+
