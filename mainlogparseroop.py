@@ -10,11 +10,11 @@ class LogEntry:
     def __str__(self):
         return f"[{self.date} {self.time} {self.level}: {self.message}]"
 
-class InvalidLogFormat(Expection):
+class InvalidLogFormat(Exception):
     pass
     
 class LogParser:
-    log_patter = re.compile(
+    log_pattern = re.compile(
         r"(?P<date>\d{4}-\d{2}-\d{2}) "
         r"(?P<time>\d{2}:\d{2}:\d{2}) "
         r"(?P<level>[A-Z]+) "
@@ -22,13 +22,37 @@ class LogParser:
     )
 
     def parse(self, line: str) -> LogEntry:
+        match = self.log_pattern.match(line.strip())
+
+        if not match:
+            raise InvalidLogFormat(f"Invaild log line: {line}")
+        data = match.groupdict()
+
+        return LogEntry(
+            date=data["date"],
+            time=data["time"],
+            level=data["level"],
+            message=data["message"],
+        )
+
+class FileReader:
+    def __init__(self, path:str):
+        self.path=path
+
+    def read_lines(self):
+        try:
+            with open(self.path, "r") as f:
+                for line in f:
+                    yield line
+        except FileNotFoundError:
+            raise FileReader(f"File not found: {self.path}")
 
 
 def main():
     reader = FileReader("logs.txt")
     parser = LogParser()
 
-    entries[]
+    entries = []
 
     for line in reader.read_lines():
         try:
